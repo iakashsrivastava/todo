@@ -1,7 +1,6 @@
 .appWrapper {
   flex-direction: column;
   display: flex;
-  background-color: aquamarine;
   margin: 0;
 }
 
