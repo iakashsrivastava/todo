@@ -1,24 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+
+import {Header} from "./containers/Header.container.react";
+import {Main} from './containers/Main.container.react';
+import {Spinner} from "./component/Spinner.component.react"
+import styles from './styles/App.module.css';
 
 function App() {
+  const [isSpinnerVisible, setIsSpinnerVisible] = useState<boolean>(false);
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={styles.appWrapper}>
+      <Header />
+      <Main />
+      {isSpinnerVisible && <Spinner />}
     </div>
   );
 }
