@@ -4,10 +4,18 @@ export enum TodoStatusEnum {
   Completed = 0
 }
 
+export interface TodoTypeApiUntypedResponse {
+  description: string,
+  dueDate: string | null,
+  id: string,
+  isComplete: boolean,
+}
+
 export interface TodoType {
     description: string,
     dueDate: Date,
     id: number,
     isComplete: boolean,
     status: TodoStatusEnum
-  }
+};
+

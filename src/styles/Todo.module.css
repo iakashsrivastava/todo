@@ -2,24 +2,36 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 2%;
-  margin: 2% 0;
+  padding: 1%;
+  margin: 1% 0;
 }
 
 .contentWrapper {
   display: flex;
   flex-direction: row;
+  padding: 0.5%;
 }
 
-.overdueContent {
+.cursorPointer {
+  cursor: pointer;
+}
+
+.dateWrapper {
+  display: flex;
+  flex-direction: row;
+  padding: 0.5%;
+  border: solid 1px;
+}
+
+.overdueContentBgColor {
   background-color: #fbcccc;
 }
 
-.completedContent {
+.completedContentBgColor {
   background-color: #ccffcb;
 }
 
-.activeContent {
+.activeContentBgColor {
   background-color: #f3f3f3;
 }
 

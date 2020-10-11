@@ -6,42 +6,42 @@ import {formattedDate} from "./../utilities/Date.helper";
 import styles from './../styles/Todo.module.css';
 
 interface Props {
-    todo: TodoType
+    todo: TodoType,
+    updateTodo: (id: number) => void
 }
 
-export const Todo: React.FC<Props> = ({todo}) => {
+export const Todo: React.FC<Props> = ({todo, updateTodo}) => {
+    
     const {id, description, dueDate, isComplete, status} = todo; 
-    const handleCLick = ()=>{
-        console.log("clicked", id);
-    }
 
     const getTodoClassName = (): string => {
         const output = [styles.todoWrapper];
         switch(status){
             case TodoStatusEnum.Completed:
-                output.push(styles.completedContent);
+                output.push(styles.completedContentBgColor);
                 break;
             case TodoStatusEnum.Overdue:
-                output.push(styles.overdueContent);
+                output.push(styles.overdueContentBgColor);
                 break;
             default:
-                output.push(styles.activeContent);
+                output.push(styles.activeContentBgColor);
         }
         return output.join(' ');
     }
-    
+
     return (
         <div className={getTodoClassName()}>
             <div className={styles.contentWrapper}>
-                <input type="checkbox" checked={true} onChange={handleCLick} />
+                <input type="checkbox" className={styles.cursorPointer} checked={isComplete} onChange={()=> updateTodo(id)} />
                 <div className={isComplete ? styles.strikeContent : ""}>
                     {description}
                 </div>
             </div>
             {dueDate.getTime() !== new Date(DATE_MAX_VALUE).getTime() && 
-                <div>
+                 <div className={styles.dateWrapper}>
                     {formattedDate(dueDate)}
-                </div>}
+                </div>
+            }
         </div>
     )
 }
