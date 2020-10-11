@@ -8,7 +8,7 @@ import { isOverDue } from "./../utilities/Date.helper";
 import styles from './../styles/Main.module.css';
 
 interface Props {
-  setIsSpinnerVisible: (isVisible: boolean) => void
+    setIsSpinnerVisible: (isVisible: boolean) => void
 }
 
 export const Main: React.FC<Props> = ({setIsSpinnerVisible}) => {

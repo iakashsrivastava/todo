@@ -12,10 +12,10 @@ export interface TodoTypeApiUntypedResponse {
 }
 
 export interface TodoType {
-    description: string,
-    dueDate: Date,
-    id: number,
-    isComplete: boolean,
-    status: TodoStatusEnum
+  description: string,
+  dueDate: Date,
+  id: number,
+  isComplete: boolean,
+  status: TodoStatusEnum
 };
 
