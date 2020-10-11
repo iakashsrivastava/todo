@@ -47,19 +47,19 @@ describe('Main Container -> Handle API Response', () => {
         fetchSpy.mockRestore();
       });
 
-      it('Match Dom against todo list received as api response', async () => {
+    it('Match Dom against todo list received as api response', async () => {
         const FAKE_TODO = [{
             "id": "1",
             "description": "File 2020 Taxes",
             "isComplete": true,
             "dueDate": "2020-03-10T17:50:44.673Z"
-          },
-          {
+            },
+            {
             "id": "2",
             "description": "Fold laundry",
             "isComplete": true,
             "dueDate": null
-          }
+            }
         ];
         const fetchSpy = jest.spyOn(global, 'fetch').mockImplementation(() => {
             return Promise.resolve(FAKE_TODO);
@@ -67,6 +67,6 @@ describe('Main Container -> Handle API Response', () => {
 
         expect(component.toJSON()).toMatchSnapshot();
         fetchSpy.mockRestore();
-      });
+    });
   
   });
