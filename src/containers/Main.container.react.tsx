@@ -7,7 +7,11 @@ import {Todo} from "./../component/Todo.component.react"
 import { isOverDue } from "./../utilities/Date.helper";
 import styles from './../styles/Main.module.css';
 
-const Main = () => {
+interface Props {
+  setIsSpinnerVisible: (isVisible: boolean) => void
+}
+
+export const Main: React.FC<Props> = ({setIsSpinnerVisible}) => {
     
     const [todoList, setTodoList] = useState<Array<TodoType>>([]);
       
@@ -27,6 +31,7 @@ const Main = () => {
     };
 
     const getInitialTodoList = async (): Promise<void> =>{
+        setIsSpinnerVisible(true);
           //  const todoListUntyped = await get();
         const todoListUntyped = [
             {
@@ -74,17 +79,25 @@ const Main = () => {
           status: getTodoStatusEnum(todo.isComplete, todo.dueDate)
         }));
         setTodoList(todoListTyped);
+        setIsSpinnerVisible(false);
     };
 
-    const updateTodo = (todoId: number) => {
+    const updateTodo = async (todoId: number) => {
+      setIsSpinnerVisible(true);
       const updatedTodoIndex = todoList.findIndex(todo => todo.id === todoId);
       const updatedTodoList = [...todoList];
-      updatedTodoList[updatedTodoIndex] = {
-        ...updatedTodoList[updatedTodoIndex],
-        isComplete: true,
-        status: TodoStatusEnum.Completed
+      if(updatedTodoList[updatedTodoIndex].isComplete === false){
+        const requestStatus = await patch(todoId);
+        if(requestStatus.status === "success"){
+          updatedTodoList[updatedTodoIndex] = {
+            ...updatedTodoList[updatedTodoIndex],
+            isComplete: true,
+            status: TodoStatusEnum.Completed
+          }
+          setTodoList(updatedTodoList);
+        }
       }
-      setTodoList(updatedTodoList);
+      setIsSpinnerVisible(false);
     }
 
     return (

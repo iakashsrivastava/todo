@@ -15,6 +15,6 @@ export const patch = async (todoId: number) => {
         headers,
         body: JSON.stringify({ "isComplete": true })
     };
-    const response = await fetch(`${process.env.REACT_APP_GET_URL ?? ''}${todoId}`, requestOptions);
+    const response = await fetch(`${process.env.REACT_APP_PATCH_URL ?? ''}${todoId}`, requestOptions);
     return await response.json();
 };
