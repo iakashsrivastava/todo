@@ -1,8 +1,8 @@
+import {DATE_MAX_VALUE, SUCCESS} from "./../utilities/Todo.constant"
 import React, {useEffect, useState} from 'react'
 import {TodoStatusEnum, TodoType, TodoTypeApiUntypedResponse} from "./../type/Todo.type";
 import {get, patch} from "../utilities/Api.helper";
 
-import {DATE_MAX_VALUE} from "./../utilities/Todo.constant"
 import {Todo} from "./../component/Todo.component.react"
 import { isOverDue } from "./../utilities/Date.helper";
 import styles from './../styles/Main.module.css';
@@ -15,9 +15,7 @@ export const Main: React.FC<Props> = ({setIsSpinnerVisible}) => {
     
     const [todoList, setTodoList] = useState<Array<TodoType>>([]);
       
-    useEffect(() => {
-        getInitialTodoList();
-    }, []);
+    useEffect(() => { getInitialTodoList()}, []);
     
     const getTodoStatusEnum = (isComplete: boolean, dueDate: string | null): TodoStatusEnum => {
         let status = TodoStatusEnum.Active;
@@ -32,8 +30,8 @@ export const Main: React.FC<Props> = ({setIsSpinnerVisible}) => {
 
     const getInitialTodoList = async (): Promise<void> =>{
         setIsSpinnerVisible(true);
-        const todoListUntyped = await get();
-        const todoListTyped = todoListUntyped.map((todo:TodoTypeApiUntypedResponse) =>({
+        const todoListUntyped: Array<TodoTypeApiUntypedResponse> = await get();
+        const todoListTyped: Array<TodoType> = todoListUntyped.map((todo:TodoTypeApiUntypedResponse) =>({
           description: todo.description,
           dueDate: new Date(todo.dueDate? todo.dueDate: DATE_MAX_VALUE),
           id: Number(todo.id),
@@ -48,9 +46,10 @@ export const Main: React.FC<Props> = ({setIsSpinnerVisible}) => {
       setIsSpinnerVisible(true);
       const updatedTodoIndex = todoList.findIndex(todo => todo.id === todoId);
       const updatedTodoList = [...todoList];
+      //Update only if current status is false
       if(updatedTodoList[updatedTodoIndex].isComplete === false){
         const requestStatus = await patch(todoId);
-        if(requestStatus.status === "success"){
+        if(requestStatus.status === SUCCESS){
           updatedTodoList[updatedTodoIndex] = {
             ...updatedTodoList[updatedTodoIndex],
             isComplete: true,

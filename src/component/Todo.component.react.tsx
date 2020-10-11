@@ -38,7 +38,7 @@ export const Todo: React.FC<Props> = ({todo, updateTodo}) => {
                 </div>
             </div>
             {dueDate.getTime() !== new Date(DATE_MAX_VALUE).getTime() && 
-                 <div className={styles.dateWrapper}>
+                <div className={styles.dateWrapper}>
                     {formattedDate(dueDate)}
                 </div>
             }

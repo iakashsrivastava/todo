@@ -5,7 +5,7 @@ const headers = {
 
 export const get = async () => {
     let output = [];
-    try{
+    try {
         const requestOptions = {method: 'GET', headers};
         const response = await fetch(process.env.REACT_APP_GET_URL ?? '', requestOptions);
         output = await response.json();
@@ -15,7 +15,7 @@ export const get = async () => {
 
 export const patch = async (todoId: number) => {
     let output = {"status": "fail"}
-    try{
+    try {
         const requestOptions = {
             method: 'PATCH',
             headers,
@@ -23,6 +23,6 @@ export const patch = async (todoId: number) => {
         };
         const response = await fetch(`${process.env.REACT_APP_PATCH_URL ?? ''}${todoId}`, requestOptions);
         output = await response.json();
-    } catch{};
+    } catch {};
     return output;
 };
