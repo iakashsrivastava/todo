@@ -7,7 +7,7 @@ import {Todo} from "./../component/Todo.component.react"
 import { isOverDue } from "./../utilities/Date.helper";
 import styles from './../styles/Main.module.css';
 
-export const Main = () => {
+const Main = () => {
     
     const [todoList, setTodoList] = useState<Array<TodoType>>([]);
       
@@ -98,3 +98,5 @@ export const Main = () => {
         </div>
     )
 }
+
+export default Main;
