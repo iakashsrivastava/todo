@@ -1,0 +1,28 @@
+.todoWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 2%;
+  margin: 2% 0;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.overdueContent {
+  background-color: #fbcccc;
+}
+
+.completedContent {
+  background-color: #ccffcb;
+}
+
+.activeContent {
+  background-color: #f3f3f3;
+}
+
+.strikeContent {
+  text-decoration: line-through;
+}

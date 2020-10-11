@@ -1,23 +1,31 @@
-import React from 'react'
-import TodoType from "./../type/Todo.type";
+import {TodoStatusEnum, TodoType} from "./../type/Todo.type";
+
+import {DATE_MAX_VALUE} from "./../utilities/Todo.constant"
+import React from 'react';
+import {formattedDate} from "./../utilities/Date.helper";
 import styles from './../styles/Todo.module.css';
 
 interface Props {
     todo: TodoType
-  }
+}
 
 export const Todo: React.FC<Props> = ({todo}) => {
-    const {id, description, isComplete} = todo; 
+    const {id, description, dueDate, isComplete, status} = todo; 
     const handleCLick = ()=>{
         console.log("clicked", id);
     }
-    
-    const getTodoClassName = (): string =>{
+
+    const getTodoClassName = (): string => {
         const output = [styles.todoWrapper];
-        if(todo.isComplete){
-            output.push(styles.overdueContent);
-        }else{
-            output.push(styles.completedContent);
+        switch(status){
+            case TodoStatusEnum.Completed:
+                output.push(styles.completedContent);
+                break;
+            case TodoStatusEnum.Overdue:
+                output.push(styles.overdueContent);
+                break;
+            default:
+                output.push(styles.activeContent);
         }
         return output.join(' ');
     }
@@ -26,11 +34,14 @@ export const Todo: React.FC<Props> = ({todo}) => {
         <div className={getTodoClassName()}>
             <div className={styles.contentWrapper}>
                 <input type="checkbox" checked={true} onChange={handleCLick} />
-                <div className={todo.isComplete ? styles.strikeContent : ""}>
+                <div className={isComplete ? styles.strikeContent : ""}>
                     {description}
                 </div>
             </div>
-            <div>{id}</div>
+            {dueDate.getTime() !== new Date(DATE_MAX_VALUE).getTime() && 
+                <div>
+                    {formattedDate(dueDate)}
+                </div>}
         </div>
     )
 }

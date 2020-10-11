@@ -1,8 +1,13 @@
-interface TodoType {
-    description: string,
-    // dueDate: any| null,
-    id: string,
-    isComplete: boolean,
-  }
+export enum TodoStatusEnum {
+  Overdue = 2,
+  Active = 1,
+  Completed = 0
+}
 
-export default TodoType;
+export interface TodoType {
+    description: string,
+    dueDate: Date,
+    id: number,
+    isComplete: boolean,
+    status: TodoStatusEnum
+  }
