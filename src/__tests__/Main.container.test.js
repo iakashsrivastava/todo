@@ -3,7 +3,7 @@ import renderer, { act } from 'react-test-renderer';
 import Main from "./../containers/Main.container.react";
 import React from 'react';
 
-describe('Main Container', () => {
+describe('Main Container -> API Params', () => {
     
     it('API call should be called with correct Get params', async () => {  
 
@@ -24,20 +24,25 @@ describe('Main Container', () => {
         expect(fetchSpy).toBeCalledWith(process.env.REACT_APP_GET_URL ?? '', requestOptions);
         fetchSpy.mockRestore();
     });
+});
 
-    it('Match Dom against an empty response', async () => {
-        const FAKE_TODO = [];
-        
+describe('Main Container -> Handle API Response', () => {
+
+    let component;
+
+    beforeEach(async () => {
         const setIsSpinnerVisible = jest.fn();
-        const fetchSpy = jest.spyOn(global, 'fetch').mockImplementation(() => {
-            return Promise.resolve(FAKE_TODO);
-        });
-        let component;
-  
         await act(async () => {
             component = renderer.create(<Main setIsSpinnerVisible={setIsSpinnerVisible}/>);
         });
+    });
 
+    it('Match Dom against an empty response', async () => {
+        const FAKE_TODO = [];
+        const fetchSpy = jest.spyOn(global, 'fetch').mockImplementation(() => {
+            return Promise.resolve(FAKE_TODO);
+        });
+  
         expect(component.toJSON()).toMatchSnapshot();
         fetchSpy.mockRestore();
       });
@@ -56,15 +61,8 @@ describe('Main Container', () => {
             "dueDate": null
           }
         ];
-        
-        const setIsSpinnerVisible = jest.fn();
         const fetchSpy = jest.spyOn(global, 'fetch').mockImplementation(() => {
             return Promise.resolve(FAKE_TODO);
-        });
-        let component;
-  
-        await act(async () => {
-            component = renderer.create(<Main setIsSpinnerVisible={setIsSpinnerVisible}/>);
         });
 
         expect(component.toJSON()).toMatchSnapshot();

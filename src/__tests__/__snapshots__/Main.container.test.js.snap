@@ -1,18 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Main Container Match Dom against a todo list received as api response 1`] = `
+exports[`Main Container -> Handle API Response Match Dom against an empty response 1`] = `
 <div
   className="mainWrapper"
 />
 `;
 
-exports[`Main Container Match Dom against an empty response 1`] = `
-<div
-  className="mainWrapper"
-/>
-`;
-
-exports[`Main Container Match Dom against todo list received as api response 1`] = `
+exports[`Main Container -> Handle API Response Match Dom against todo list received as api response 1`] = `
 <div
   className="mainWrapper"
 />
