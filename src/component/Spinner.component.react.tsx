@@ -1,9 +1,10 @@
 import React from 'react'
+import styles from './../styles/Spinner.module.css';
 
-export const Spinner = () => {
+const Spinner = () => {
     return (
-        <h1>
-            Loading .....
-        </h1>
+        <div className={styles.loader}></div>
     )
 }
+
+export default Spinner;
