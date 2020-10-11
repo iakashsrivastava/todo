@@ -67,10 +67,10 @@ export const Main = () => {
             }
           ];
           const todoListTyped = todoListUntyped.map(todo =>({
-            id: Number(todo.id),
             description: todo.description,
-            isComplete: todo.isComplete,
             dueDate: new Date(todo.dueDate? todo.dueDate: DATE_MAX_VALUE),
+            id: Number(todo.id),
+            isComplete: todo.isComplete,
             status: getTodoStatusEnum(todo.isComplete, todo.dueDate)
           }));
           console.log(todoListTyped);
@@ -80,8 +80,9 @@ export const Main = () => {
     return (
         <div className={styles.mainWrapper}>
         {todoList.sort((a,b) =>
-            b.status - a.status || a.dueDate.getTime() - b.dueDate.getTime()
-        ).map(todo =>
+            b.status - a.status || 
+            a.dueDate.getTime() - b.dueDate.getTime()
+          ).map(todo =>
             <Todo key={todo.id} todo={todo} />
         )}
         </div>
